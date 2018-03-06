@@ -10,7 +10,7 @@ docker build --no-cache -t [image-name]:latest .
 
 ## Usage
 ```
-docker run -d -p [LocalPort]:[LocalPort] -e "LOCAL_PORT=[LocalPort]" -e "REMOTE_HOST=[RemoteHost]" -e "REMOTE_PORT=[RemotePort]" -e "SSH_USER=[SshUser]" -e "SSH_HOST=[SshHost]" -e "ID_FILE=/app/ssh_id_file" -v [IdFile]:/app/ssh_id_file:ro --name=tunnel [image-name]
+docker run -d -p [LocalPort]:[LocalPort] -e "LOCAL_PORT=[LocalPort]" -e "REMOTE_HOST=[RemoteHost]" -e "REMOTE_PORT=[RemotePort]" -e "SSH_USER=[SshUser]" -e "SSH_HOST=[SshHost]" -v [IdFile]:/app/ssh.pem:ro --name=tunnel [image-name]
 ```
 
 ## Usage via Docker-composer.yml
@@ -26,10 +26,8 @@ ssh-tunnel:
       REMOTE_PORT: [RemotePort]
       SSH_USER: [SshUser]
       SSH_HOST: [SshHost]
-      ID_FILE: [IdFile]
     volumes:
-      - [IdFile]:/app/ssh_id_file:ro
+      - [IdFile]:/app/ssh.pem:ro
     networks:
       - backend
-      
 ```
