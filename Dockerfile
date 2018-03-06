@@ -8,7 +8,7 @@ RUN apk --update add openssh-client \
     && rm -f /var/cache/apk/*
 
 # Security fix for CVE-2016-0777 and CVE-2016-0778
-RUN echo -e 'Host *\nUseRoaming no' >> /etc/ssh/ssh_config \
+RUN echo -e 'Host *\nUseRoaming no\nServerAliveInterval 30\nServerAliveCountMax 20\nTCPKeepAlive no' >> /etc/ssh/ssh_config \
     && mkdir ~/.ssh
 
 ADD start.sh app/
